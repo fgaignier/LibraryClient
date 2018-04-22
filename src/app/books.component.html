@@ -1,0 +1,19 @@
+<hr>
+
+<h3>Consultation des livres</h3>
+
+<h2>Selectionnez un livre a emprunter:</h2>
+
+<ul class="books">
+	<table>
+		<tr><td>id</td><td>titre</td><td>auteur</td><td>editeur</td><td>statut</td><td>emprunt/retour</td></tr>
+  		<tr *ngFor="let book of books">
+  			<td>{{book.id}}</td><td>{{book.titre}}</td><td>{{book.auteur}}</td><td>{{book.editeur}}</td>
+  			<td *ngIf="book.disponibility == true" bgcolor=#00FF00>disponible</td>
+  			<td *ngIf="book.disponibility == true"><input id=book.id type="checkbox" (click)="borrowBook(book)"></td>
+		  	<td *ngIf="book.disponibility == false" bgcolor=#FF0000>indisponible</td>
+		  	<td *ngIf="book.disponibility == false"><input id=book.id type="checkbox" (click)="returnBook(book)"></td>
+  		</tr>
+  </table>
+</ul>
+

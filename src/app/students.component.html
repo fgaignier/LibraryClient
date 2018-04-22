@@ -1,0 +1,17 @@
+<hr>
+
+<h3>Choisez un etudiant</h3>
+
+<ul class="students">
+	<select [(ngModel)]="selectedStudent" required> 
+    	<option *ngFor="let student of students" [ngValue]="student">
+			 	{{student.numEtudiant}} : {{student.nom}} : {{student.prenom}}
+    	</option>
+  	</select>
+  	
+	<div *ngIf="selectedStudent">
+  		<h2>Selected student: {{selectedStudent.prenom | uppercase}} / {{selectedStudent.nom | uppercase}}</h2>
+  		<button (click)="selectStudent(selectedStudent)">Select</button>
+	</div>
+</ul>
+
