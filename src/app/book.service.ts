@@ -25,4 +25,7 @@ export class BookService {
     return this.http.post("http://localhost:8080/livres/"+id, null);
   }
 
+  public getBooksFilteredWithObservable(titre, auteur): Observable<Book[]> {
+  	return this.http.get("http://localhost:8080/livres/selection?auteur=" + auteur + "&titre=" + titre).map((response: Response) => response || []);
+  }
 }

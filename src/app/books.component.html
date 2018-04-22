@@ -1,7 +1,16 @@
 <hr>
 
 <h3>Consultation des livres</h3>
-
+<h2> Recherche (case sensitive)</h2>
+<h2> 
+<table>
+	<tr>
+		<td>titre:</td><td><input type="text1" id="id1" [(ngModel)] = "titre"></td>
+		<td>auteur:</td><td><input type="text2" id="id2" [(ngModel)] = "auteur"></td>
+		<td><button type="button" name="filter" (click)="filterBook(titre, auteur)">Filter</button></td>
+	</tr>
+</table>
+</h2>
 <h2>Selectionnez un livre a emprunter:</h2>
 
 <ul class="books">

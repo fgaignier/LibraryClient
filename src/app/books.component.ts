@@ -34,6 +34,23 @@ export class BooksComponent implements OnInit {
     );
   }
 
+  filterBook(titre: string , auteur: string): void {
+	
+	if(!auteur) {
+  		auteur="";
+  	}
+  	if(!titre) {
+  		titre="";
+  	}
+	console.log('FILTER BOOKS ' + titre + auteur);
+	
+  	this.bookService.getBooksFilteredWithObservable(titre, auteur).subscribe(
+       res => {
+           this.books = res;
+       }
+    );
+  }
+  
   ngOnInit(): void {
   	console.log('INIT BOOKS COMPONENT');
     this.getBooks();
