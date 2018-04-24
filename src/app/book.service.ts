@@ -8,8 +8,6 @@ import { Book } from './book';
 
 @Injectable()
 export class BookService {
-
-  books: Book[];
   
   constructor(private http: HttpClient) {}
   

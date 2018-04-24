@@ -7,5 +7,6 @@ export class Book {
   editeur: string;
   disponibility: boolean;
   emprunts: Borrow[];
+  
 }
 

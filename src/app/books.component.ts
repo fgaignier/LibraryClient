@@ -7,6 +7,7 @@ import { Book } from './book';
 import { BookService } from './book.service';
 import { Student } from './student';
 import { StudentService } from './student.service';
+import { Borrow } from './borrow';
 
 @Component({
   selector: 'my-books',
@@ -19,6 +20,8 @@ export class BooksComponent implements OnInit {
   books: Book[];
   selectedBook: Book;
   student: Student;
+  start: Date;
+  retour: Date;
 
   constructor(
     private bookService: BookService,
@@ -63,8 +66,40 @@ export class BooksComponent implements OnInit {
     this.selectedBook = book;
   }
 
+  getCurrentBorrower(book: Book): number {
+  	if(book.disponibility) { return -1;}
+  	for (let emprunt of book.emprunts) {
+  		if(!emprunt.returned) {
+  			console.log(emprunt.etudiant.prenom);
+  			return emprunt.etudiant.numEtudiant;
+  		}	
+  	}
+  	return -1;
+  }
+  
+  getCurrentBorrowerName(book: Book): string {
+  	if(book.disponibility) { return "";}
+  	for (let emprunt of book.emprunts) {
+  		if(!emprunt.returned) {
+  			console.log(emprunt.etudiant.prenom);
+  			return emprunt.etudiant.prenom;
+  		}	
+  	}
+  	return "";
+  }
+  
+  isBorowedByMe(book :Book): boolean {
+  	if(this.getCurrentBorrower(book) == this.student.numEtudiant) {
+  		return true;
+  	}
+  	return false;
+  }
+  
   borrowBook(book: Book): void {
   	console.log('JEMPRUNTE UN LIVRE');
+  	this.start = new Date();
+  	let borrow = new Borrow(this.student, book);
+  	book.emprunts.push(borrow);
   	book.disponibility = false;
   	this.route.paramMap
       .switchMap((params: ParamMap) => this.bookService.borrowWithObservable(book.id, params.get('numEtudiant')))

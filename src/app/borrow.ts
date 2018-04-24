@@ -7,4 +7,11 @@ export class Borrow {
   date_retour: string;
   etudiant: Student;
   livre: Book;
+  returned: boolean;
+  
+  constructor(etudiant: Student, livre: Book) {
+        this.etudiant = etudiant;
+        this.livre = livre;
+        this.returned = false;
+    }
 }
